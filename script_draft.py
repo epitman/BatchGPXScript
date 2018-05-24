@@ -16,28 +16,17 @@ try:
 	arcpy.env.workspace = r"D://PT/BusStops"
 	arcpy.env.overwriteOutput = True
 
-
-	
-  routes = 
-  
+	for files in folder:
+		
+ 
 
 	# Create new geodatabase to store created polylines.
 	arcpy.CreateFileGDB_management("D:/MSGT/Data/PythonBook/Exercise06/Results", "Routes.gdb")
 
 
-
+	# Convert GPX file to Feature Class and then copy to Geodatabase
 	arcpy.GPXtoFeatures_conversion('c:\\GPX_Files\\Hike.gpx', 'c:\\gisData\\Hike.shp')
-
-
-
-
-	# Determine desired feature classes and move to new gdb	
-	ride_list = arcpy.ListFeatureClasses()
-	for ride in ride_list:
-		ridedesc = arcpy.Describe(fc)
-		if ridedesc.shapeType == "Polygon":	
-			arcpy.CopyFeatures_management(fc, "D:/MSGT/Data/PythonBook/Exercise06/Results/NMpoly.gdb/" + ridedesc.basename)
-
+	arcpy.CopyFeatures_management(ride, "D:/MSGT/Data/PythonBook/Exercise06/Results/NMpoly.gdb/" + ridedesc.basename)
 
 
 
