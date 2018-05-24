@@ -9,24 +9,28 @@
 #6. Repeat script through list of rides.
 
 import arcpy
-
-
+import os
 
 try:
 	arcpy.env.workspace = r"D://PT/BusStops"
 	arcpy.env.overwriteOutput = True
 
-	for files in folder:
-		
- 
-
 	# Create new geodatabase to store created polylines.
 	arcpy.CreateFileGDB_management("D:/MSGT/Data/PythonBook/Exercise06/Results", "Routes.gdb")
+	
+	
+	
+	# Iterate over files in folder to convert GPX file to Feature Class and then copy to Geodatabase
+	
+	path = 'rides/'
+	folder = os.listdir(path)
+	for Input_GPX_File in folder:
+		arcpy.GPXtoFeatures_conversion(Input_GPX_File, Output_Feature_class)
+		arcpy.CopyFeatures_management(Output_Feature_class, "Routes.gdb/" + Output_Feature_class.basename)
+	
 
-
-	# Convert GPX file to Feature Class and then copy to Geodatabase
-	arcpy.GPXtoFeatures_conversion('c:\\GPX_Files\\Hike.gpx', 'c:\\gisData\\Hike.shp')
-	arcpy.CopyFeatures_management(ride, "D:/MSGT/Data/PythonBook/Exercise06/Results/NMpoly.gdb/" + ridedesc.basename)
+		
+		
 
 
 
